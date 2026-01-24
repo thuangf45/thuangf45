@@ -1,7 +1,6 @@
 # Hi there, I'm Nguyen Minh Thuan 👋 
 
 <div align="center">
-
   <p>
     <img src="https://komarev.com/ghpvc/?username=Lucifer-VN&label=Profile%20views&color=0e75b6&style=flat-square" alt="Views" />
     <img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=.net" alt="NET Version" />
@@ -13,9 +12,8 @@
     <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Status" />
   </p>
 
-  <img width="500px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Lucifer-VN&layout=compact&theme=tokyonight&hide_border=true&langs_count=6" />
+  <img width="500px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Lucifer-VN&layout=compact&theme=tokyonight&hide_border=true&langs_count=6&hide=html,css,batchfile,shell,dockerfile" />
 </div>
-
 ---
 
 ### 🚀 About Me
