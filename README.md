@@ -2,7 +2,7 @@
 
 <div align="center">
   <p>
-    <img src="https://komarev.com/ghpvc/?username=Lucifer-VN&label=Profile%20views&color=0e75b6&style=flat-square" alt="Views" />
+    <img src="https://komarev.com/ghpvc/?username=thuangf45&label=Profile%20views&color=0e75b6&style=flat-square" alt="Views" />
     <img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=.net" alt="NET Version" />
     <a href="https://www.nuget.org/packages/LuciferCore">
       <img src="https://img.shields.io/nuget/dt/LuciferCore?color=0e75b6&label=LUCIFERCORE%20DOWNLOADS&style=flat-square" alt="NuGet Downloads" />
@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Status" />
   </p>
 
-  <img width="500px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Lucifer-VN&layout=compact&theme=tokyonight&hide_border=true&langs_count=6&hide=html,css,batchfile,shell,dockerfile" />
+  <img width="500px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=thuangf45&layout=compact&theme=tokyonight&hide_border=true&langs_count=6&hide=html,css,batchfile,shell,dockerfile" />
 </div>
 
 ---
@@ -42,7 +42,7 @@ I am a **System Architect** and Information Technology student at **VNU-HCM Univ
 
 **LuciferCore** is my most significant contribution to the .NET ecosystem—a framework built 100% from scratch to maximize performance and automate boilerplate tasks.
 
-- 📈 **NuGet Success:** Reached **~11,000+ downloads** within the first month of release.
+- 📈 **NuGet Success:** Reached **~25,000+ downloads**
 - 🏗️ **Performance:** Optimized for multi-threading and CPU/I/O separation with high-performance async I/O.
 - 🤖 **Automation:** Features **Lucifer.CLI** for instant scaffolding and attribute-based auto-routing/parsing.
 - 🔗 **Links:** [NuGet Package](https://www.nuget.org/packages/LuciferCore) | [GitHub Repository](https://github.com/thuangf45/LuciferOfficial)
@@ -51,7 +51,7 @@ I am a **System Architect** and Information Technology student at **VNU-HCM Univ
 
 ### 📫 Contact Me
 - 📧 **Email:** kingnemacc@gmail.com
-- 🌐 **GitHub:** [Lucifer-VN](https://github.com/Lucifer-VN)
+- 🌐 **GitHub:** [thuangf45](https://github.com/thuangf45)
 - 👤 **Facebook:** [Minh Thuận](https://www.facebook.com/minhthuan.nguyen.773124)
 
 <p align="center">
