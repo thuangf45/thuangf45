@@ -15,9 +15,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          # Sử dụng token để checkout giúp các bước git sau này tự nhận quyền push
           token: ${{ secrets.GH_PAT }}
-          fetch-depth: 0 # Quan trọng để tính toán số lượng commit chính xác
+          fetch-depth: 0 # Quan trọng để lấy đúng số COMMITS
 
       - name: Fetch and Calculate Data
         run: |
@@ -39,10 +38,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           git add top-langs.json github-stats.json
-          # Chỉ commit nếu có thay đổi thực sự
+          
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Update GitHub stats [skip ci]"
-            git push origin main
+            # Ép quyền push bằng PAT để tránh lỗi 403
+            git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/thuangf45/thuangf45.git HEAD:main
           fi
