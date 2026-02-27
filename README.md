@@ -1,26 +1,34 @@
+<div align="center">
+  <img src="https://github.com/thuangf45/thuangf45/blob/main/banner.gif?raw=true" width="100%" style="border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="Nguyen Minh Thuan Banner" />
+</div>
+
+<br>
+
 # Hi there, I'm Nguyen Minh Thuan (thuangf45) 👋 
 
 <div align="center">
   <p>
-    <img src="https://komarev.com/ghpvc/?username=thuangf45&label=Profile%20views&color=0e75b6&style=flat-square" alt="Views" />
-    <img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=.net" alt="NET Version" />
-    <a href="https://www.nuget.org/packages/LuciferCore">
-      <img src="https://img.shields.io/nuget/dt/LuciferCore?color=0e75b6&label=LUCIFERCORE%20DOWNLOADS&style=flat-square" alt="NuGet Downloads" />
+    <img src="https://komarev.com/ghpvc/?username=thuangf45&label=Profile%20views&color=0e75b6&style=flat-square" />
+    <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" />
+    <img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=.net" />
+    <a href="https://www.nuget.org/profiles/thuangf45">
+      <img src="https://img.shields.io/badge/dynamic/json?label=NUGET%20DOWNLOADS&query=%24.nuget_total&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square&color=0e75b6&logo=nuget" />
     </a>
-    <a href="https://dev.to/thuangf45">
-      <img src="https://img.shields.io/badge/dynamic/json?label=DEV.TO%20REACTIONS&query=%24.reactions&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/devto.json&style=flat-square&logo=dev.to" alt="Dev.to Reactions"/>
-  </a>
-    <a href="https://dev.to/thuangf45">
-      <img src="https://img.shields.io/badge/dynamic/json?label=DEV.TO%20POSTS&query=%24.posts&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/devto.json&style=flat-square&logo=dev.to" alt="Dev.to Posts"/>
-    </a>
-    <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Status" />
-    
+    <img src="https://img.shields.io/badge/dynamic/json?label=GLOBAL%20COMMITS&query=%24.commits&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square&color=0e75b6" />
+    <img src="https://img.shields.io/badge/dynamic/json?label=PRIMARY%20LANGUAGE&query=%24%5B0%5D&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/top-langs.json&style=flat-square&color=0e75b6" />
   </p>
 
-<img src="https://img.shields.io/badge/dynamic/json?label=Top%20Languages&query=%24&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/top-langs.json&style=flat-square" alt="Top Languages" />
-<img src="https://img.shields.io/badge/dynamic/json?label=Commits&query=%24.commits&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square" alt="Commits" />
-<img src="https://img.shields.io/badge/dynamic/json?label=Stars&query=%24.stars&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square" alt="Stars" />
-<img src="https://img.shields.io/badge/dynamic/json?label=Forks&query=%24.forks&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square" alt="Forks" />
+  <p>
+    <img src="https://img.shields.io/badge/dynamic/json?label=PULL%20REQUESTS&query=%24.prs&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square&color=28a745&logo=github" />
+    <img src="https://img.shields.io/badge/dynamic/json?label=ISSUES%20HANDLED&query=%24.issues&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square&color=d73a49&logo=github" />
+    <img src="https://img.shields.io/badge/dynamic/json?label=CODE%20REVIEWS&query=%24.reviews&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square&color=6f42c1&logo=github" />
+    <a href="https://dev.to/thuangf45">
+      <img src="https://img.shields.io/badge/dynamic/json?label=DEV.TO%20REACTIONS&query=%24.reactions&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/devto.json&style=flat-square&logo=dev.to&color=0a0a0a" />
+    </a>
+    <a href="https://dev.to/thuangf45">
+      <img src="https://img.shields.io/badge/dynamic/json?label=DEV.TO%20POSTS&query=%24.posts&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/devto.json&style=flat-square&logo=dev.to&color=0a0a0a" />
+    </a>
+  </p>
 </div>
 
 ---
@@ -40,21 +48,11 @@ I am a **System Architect** and IT student at **VNU-HCM University of Science**.
 - **Programming Languages:**
   - **Primary:** ![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp&logoColor=white) (.NET)
   - **Others:** ![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat&logo=c%2B%2B&logoColor=white) ![SQL](https://img.shields.io/badge/SQL-CC2927?style=flat&logo=microsoft-sql-server&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-- **Core Knowledge:** DSA, OOP, API Design, MVC/MVP, Operating Systems, and Advanced Networking Protocols.
+- **Core Knowledge:** DSA, OOP, DOD, API Design, MVC/MVP, Operating Systems, and Advanced Networking Protocols.
 - **Tools & DevOps:**
   - ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazon-aws&logoColor=white)
   - Visual Studio, VS Code, SSMS, Cloudflare.
 
----
-
-### 🌟 Key Achievement: LuciferCore Framework
-
-**LuciferCore** is my most significant contribution to the .NET ecosystem—a framework built from scratch to maximize performance and automate boilerplate tasks.
-
-- 📈 **NuGet Success:** Reached **~25,000+ downloads**
-- 🏗️ **Modern Foundations:** Based on **NetCoreServer** and **Unity Loop** principles, enhanced with **Zero-Allocation** Virtualization.
-- 🤖 **Automation:** Attribute-based routing (`[Server]`, `[Handler]`) and specialized **Lucifer.CLI** for scaffolding.
-  
 ---
 
 ### 📫 Connect with me
