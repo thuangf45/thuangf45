@@ -2,53 +2,47 @@ name: GitHub Stats Self-hosted
 
 on:
   schedule:
-    - cron: "0 */6 * * *"  # chạy mỗi 6 giờ
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
-  id-token: write
 
 jobs:
   stats:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
+          # Sử dụng token để checkout giúp các bước git sau này tự nhận quyền push
           token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0 # Quan trọng để tính toán số lượng commit chính xác
 
-      - name: Install tools
+      - name: Fetch and Calculate Data
         run: |
-          sudo apt-get update
-          sudo apt-get install -y jq git
-
-      - name: Fetch repo languages
-        run: |
-          # lấy languages từ repo
-          curl -s https://api.github.com/repos/thuangf45/thuangf45/languages > languages.json
-          cat languages.json
-
-      - name: Calculate top 6 languages
-        run: |
-          LANGS=$(jq 'to_entries | sort_by(.value) | reverse | .[0:6] | from_entries' languages.json)
-          echo "$LANGS" > top-langs.json
-          cat top-langs.json
-
-      - name: Calculate total commits, stars, forks
-        run: |
+          # Fetch languages
+          curl -s https://api.github.com/repos/thuangf45/thuangf45/languages -o languages.json
+          jq 'to_entries | sort_by(.value) | reverse | .[0:6] | from_entries' languages.json > top-langs.json
+          
+          # Calculate stats
           COMMITS=$(git rev-list --count HEAD)
-          STARS=$(curl -s https://api.github.com/repos/thuangf45/thuangf45 | jq '.stargazers_count')
-          FORKS=$(curl -s https://api.github.com/repos/thuangf45/thuangf45 | jq '.forks_count')
+          REPO_DATA=$(curl -s https://api.github.com/repos/thuangf45/thuangf45)
+          STARS=$(echo $REPO_DATA | jq '.stargazers_count // 0')
+          FORKS=$(echo $REPO_DATA | jq '.forks_count // 0')
+          
           echo "{\"commits\":$COMMITS,\"stars\":$STARS,\"forks\":$FORKS}" > github-stats.json
-          cat github-stats.json
 
-      - name: Commit stats
+      - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
           git add top-langs.json github-stats.json
-          git diff --cached --quiet || git commit -m "Update GitHub stats"
-          # push explicit với token
-          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/thuangf45/thuangf45.git HEAD:main
+          # Chỉ commit nếu có thay đổi thực sự
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update GitHub stats [skip ci]"
+            git push origin main
+          fi
