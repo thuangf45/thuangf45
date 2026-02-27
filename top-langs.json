@@ -1,8 +1,8 @@
-{
-  "C#": 253256,
-  "TSQL": 249456,
-  "CSS": 60948,
-  "JavaScript": 35804,
-  "HTML": 26086,
-  "Batchfile": 13720
-}
+[
+  "C#",
+  "TSQL",
+  "CSS",
+  "JavaScript",
+  "HTML",
+  "Batchfile"
+]
