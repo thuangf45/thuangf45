@@ -24,29 +24,25 @@ jobs:
           REPO_LIST=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
             "https://api.github.com/users/thuangf45/repos?per_page=100")
 
-          # 2. Tính toán Top Languages (Cộng dồn Byte trên toàn bộ Ecosystem)
+          # 2. Tính toán Top Languages (Mảng top 6 để Shields.io bóc tách $[0])
           echo "{}" > all_languages.json
           for repo in $(echo $REPO_LIST | jq -r '.[].full_name'); do
             curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
               "https://api.github.com/repos/$repo/languages" > lang.json
-            
-            # Cộng dồn dung lượng byte của từng ngôn ngữ
             jq -s 'reduce .[] as $item ({}; . * $item | with_entries(.value = (if .key | in($item) then .value + $item[.key] else .value end)))' \
               all_languages.json lang.json > temp.json && mv temp.json all_languages.json
           done
-          # Lưu mảng top 6 ngôn ngữ để Shields.io dễ bóc tách
           jq 'to_entries | sort_by(.value) | reverse | .[0:6] | map(.key)' all_languages.json > top-langs.json
 
-          # 3. Lấy tổng Commits toàn GitHub (Search API cho cả Public & Private)
+          # 3. Lấy tổng Commits (Global Search)
           TOTAL_COMMITS=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
             "https://api.github.com/search/commits?q=author:thuangf45" | jq '.total_count // 0')
 
-          # 4. Tính tổng Stars và Forks trên mọi repository
+          # 4. Tính tổng Stars và Forks
           TOTAL_STARS=$(echo $REPO_LIST | jq '[.[].stargazers_count] | add // 0')
           TOTAL_FORKS=$(echo $REPO_LIST | jq '[.[].forks_count] | add // 0')
 
-          # 5. Lấy TỔNG lượt tải NuGet (Quét toàn bộ package của owner thuangf45)
-          # Query theo owner giúp cộng dồn LuciferCore và các package khác
+          # 5. Lấy TỔNG lượt tải NuGet cho owner thuangf45
           NUGET_RESP=$(curl -s "https://azuresearch-usnc.nuget.org/query?q=owner:thuangf45")
           TOTAL_NUGET_DOWNLOADS=$(echo $NUGET_RESP | jq '[.data[].totalDownloads] | add // 0')
 
@@ -55,18 +51,16 @@ jobs:
           DEVTO_POSTS=$(jq 'length' articles.json)
           DEVTO_REACTIONS=$(jq '[.[] | .public_reactions_count // 0] | add // 0' articles.json)
 
-          # 7. Xuất các file JSON tổng hợp
-          # nuget_total sẽ thay thế nuget_downloads cũ để phản ánh tổng thể
-          echo "{\"commits\":$TOTAL_COMMITS,\"stars\":$TOTAL_STARS,\"forks\":$FORKS,\"nuget_total\":$TOTAL_NUGET_DOWNLOADS}" > github-stats.json
-          echo "{\"posts\":$DEVTO_POSTS,\"reactions\":$DEVTO_REACTIONS}" > devto.json
+          # 7. Xuất các file JSON tổng hợp (SỬA LỖI: Gán mặc định 0 nếu rỗng)
+          # Dùng cú pháp ${VAR:-0} để tránh lỗi "forks":,
+          echo "{\"commits\":${TOTAL_COMMITS:-0},\"stars\":${TOTAL_STARS:-0},\"forks\":${TOTAL_FORKS:-0},\"nuget_total\":${TOTAL_NUGET_DOWNLOADS:-0}}" > github-stats.json
+          echo "{\"posts\":${DEVTO_POSTS:-0},\"reactions\":${DEVTO_REACTIONS:-0}}" > devto.json
 
       - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
           git add top-langs.json github-stats.json devto.json
-          
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
