@@ -17,7 +17,10 @@
     
   </p>
 
-  <img width="500px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=thuangf45&layout=compact&theme=tokyonight&hide_border=true&langs_count=6&hide=html,css,batchfile,shell,dockerfile" />
+<img src="https://img.shields.io/badge/dynamic/json?label=Top%20Languages&query=%24&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/top-langs.json&style=flat-square" alt="Top Languages" />
+<img src="https://img.shields.io/badge/dynamic/json?label=Commits&query=%24.commits&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square" alt="Commits" />
+<img src="https://img.shields.io/badge/dynamic/json?label=Stars&query=%24.stars&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square" alt="Stars" />
+<img src="https://img.shields.io/badge/dynamic/json?label=Forks&query=%24.forks&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/github-stats.json&style=flat-square" alt="Forks" />
 </div>
 
 ---
