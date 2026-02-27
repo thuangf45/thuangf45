@@ -1,4 +1,4 @@
-# Hi there, I'm Nguyen Minh Thuan 👋 
+# Hi there, I'm Nguyen Minh Thuan (thuangf45) 👋 
 
 <div align="center">
   <p>
@@ -7,9 +7,14 @@
     <a href="https://www.nuget.org/packages/LuciferCore">
       <img src="https://img.shields.io/nuget/dt/LuciferCore?color=0e75b6&label=LUCIFERCORE%20DOWNLOADS&style=flat-square" alt="NuGet Downloads" />
     </a>
-    <img src="https://img.shields.io/badge/Infrastructure-AWS-232F3E?style=flat-square&logo=amazon-aws" alt="AWS" />
-    <img src="https://img.shields.io/badge/Container-Docker-2496ED?style=flat-square&logo=docker" alt="Docker" />
+    <a href="https://dev.to/thuangf45">
+      <img src="https://img.shields.io/badge/dynamic/json?label=DEV.TO%20REACTIONS&query=%24.reactions&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/devto.json&style=flat-square&logo=dev.to" alt="Dev.to Reactions"/>
+  </a>
+    <a href="https://dev.to/thuangf45">
+      <img src="https://img.shields.io/badge/dynamic/json?label=DEV.TO%20POSTS&query=%24.posts&url=https://raw.githubusercontent.com/thuangf45/thuangf45/main/devto.json&style=flat-square&logo=dev.to" alt="Dev.to Posts"/>
+    </a>
     <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Status" />
+    
   </p>
 
   <img width="500px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=thuangf45&layout=compact&theme=tokyonight&hide_border=true&langs_count=6&hide=html,css,batchfile,shell,dockerfile" />
@@ -18,11 +23,12 @@
 ---
 
 ### 🚀 About Me
-I am a **System Architect** and Information Technology student at **VNU-HCM University of Science**. I specialize in building high-performance systems and automated frameworks with a focus on performance, scalability, and developer productivity.
+I am a **System Architect** and IT student at **VNU-HCM University of Science**. I specialize in building high-performance systems and automated frameworks with a focus on **Zero-Allocation** memory management and high-concurrency scalability.
 
 - 🎓 **Education:** University of Science (VNU-HCMUS) - IT (2023-2027).
-- 🔭 **Main Project:** Author of **LuciferCore**, a modular high-performance backend framework.
-- ⚡ **Core Focus:** High-performance Core Loop, Concurrency, and Async I/O optimization.
+- 🔭 **Main Project:** Author of **[LuciferCore](https://www.nuget.org/packages/LuciferCore)**, a high-performance .NET framework.
+- ✍️ **Writing:** I share technical deep dives on performance optimization at **[Dev.to/thuangf45](https://dev.to/thuangf45)**.
+- ⚡ **Core Focus:** SIMD Copy, Async Channels, Buffer-Model Architecture, and High-performance Core Loops.
 
 ---
 
@@ -40,20 +46,20 @@ I am a **System Architect** and Information Technology student at **VNU-HCM Univ
 
 ### 🌟 Key Achievement: LuciferCore Framework
 
-**LuciferCore** is my most significant contribution to the .NET ecosystem—a framework built 100% from scratch to maximize performance and automate boilerplate tasks.
+**LuciferCore** is my most significant contribution to the .NET ecosystem—a framework built from scratch to maximize performance and automate boilerplate tasks.
 
 - 📈 **NuGet Success:** Reached **~25,000+ downloads**
-- 🏗️ **Performance:** Optimized for multi-threading and CPU/I/O separation with high-performance async I/O.
-- 🤖 **Automation:** Features **Lucifer.CLI** for instant scaffolding and attribute-based auto-routing/parsing.
-- 🔗 **Links:** [NuGet Package](https://www.nuget.org/packages/LuciferCore) | [GitHub Repository](https://github.com/thuangf45/LuciferOfficial)
-
+- 🏗️ **Modern Foundations:** Based on **NetCoreServer** and **Unity Loop** principles, enhanced with **Zero-Allocation** Virtualization.
+- 🤖 **Automation:** Attribute-based routing (`[Server]`, `[Handler]`) and specialized **Lucifer.CLI** for scaffolding.
+  
 ---
 
-### 📫 Contact Me
-- 📧 **Email:** kingnemacc@gmail.com
-- 🌐 **GitHub:** [thuangf45](https://github.com/thuangf45)
+### 📫 Connect with me
+- 🌐 **NuGet:** [thuangf45 on Nuget.org](https://www.nuget.org/profiles/thuangf45)
+- 📝 **Blog:** [thuangf45 on Dev.to](https://dev.to/thuangf45)
 - 👤 **Facebook:** [Minh Thuận](https://www.facebook.com/minhthuan.nguyen.773124)
+- 📧 **Email:** kingnemacc@gmail.com
 
 <p align="center">
-  <i>"Committed to building high-quality, real-world technology products."</i>
+  <i>"Pushing the boundaries of .NET performance, one buffer at a time."</i>
 </p>
