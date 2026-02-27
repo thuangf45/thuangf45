@@ -1,0 +1,38 @@
+name: Devto Stats
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Fetch and Calculate Stats
+        run: |
+          set -e
+
+          curl -fsSL "https://dev.to/api/articles?username=thuangf45" -o articles.json
+
+          POSTS=$(jq 'length' articles.json)
+          REACTIONS=$(jq '[.[] | .public_reactions_count // 0] | add // 0' articles.json)
+
+          echo "{\"posts\":$POSTS,\"reactions\":$REACTIONS}" > devto.json
+
+          cat devto.json
+
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add devto.json
+          git diff --cached --quiet || git commit -m "Update Dev.to stats"
+          git push
