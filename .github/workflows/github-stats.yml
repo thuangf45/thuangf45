@@ -1,0 +1,51 @@
+name: GitHub Stats Self-hosted
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # chạy mỗi 6 giờ
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq git
+
+      - name: Fetch repo languages
+        run: |
+          # lấy languages từ repo
+          curl -s https://api.github.com/repos/thuangf45/thuangf45/languages > languages.json
+          cat languages.json
+
+      - name: Calculate top 6 languages
+        run: |
+          LANGS=$(jq 'to_entries | sort_by(.value) | reverse | .[0:6] | from_entries' languages.json)
+          echo "$LANGS" > top-langs.json
+          cat top-langs.json
+
+      - name: Calculate total commits, stars, forks
+        run: |
+          COMMITS=$(git rev-list --count HEAD)
+          STARS=$(curl -s https://api.github.com/repos/thuangf45/thuangf45 | jq '.stargazers_count')
+          FORKS=$(curl -s https://api.github.com/repos/thuangf45/thuangf45 | jq '.forks_count')
+          echo "{\"commits\":$COMMITS,\"stars\":$STARS,\"forks\":$FORKS}" > github-stats.json
+          cat github-stats.json
+
+      - name: Commit stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add top-langs.json github-stats.json
+          git diff --cached --quiet || git commit -m "Update GitHub stats"
+          git push
