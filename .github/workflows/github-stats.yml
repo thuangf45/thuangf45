@@ -18,13 +18,13 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 0
 
-      - name: Fetch Global Data
+      - name: Fetch and Calculate All Data
         run: |
           # 1. Lấy danh sách toàn bộ Repo (Public + Private)
           REPO_LIST=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
             "https://api.github.com/users/thuangf45/repos?per_page=100")
 
-          # 2. Tính toán Top Languages trên TOÀN BỘ hệ thống
+          # 2. Tính toán Top Languages (Cộng dồn Byte trên toàn bộ Ecosystem)
           echo "{}" > all_languages.json
           for repo in $(echo $REPO_LIST | jq -r '.[].full_name'); do
             curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
@@ -34,20 +34,21 @@ jobs:
             jq -s 'reduce .[] as $item ({}; . * $item | with_entries(.value = (if .key | in($item) then .value + $item[.key] else .value end)))' \
               all_languages.json lang.json > temp.json && mv temp.json all_languages.json
           done
-          jq 'to_entries | sort_by(.value) | reverse | .[0:6] | from_entries' all_languages.json > top-langs.json
+          # Lưu mảng top 6 ngôn ngữ để Shields.io dễ bóc tách
+          jq 'to_entries | sort_by(.value) | reverse | .[0:6] | map(.key)' all_languages.json > top-langs.json
 
-          # 3. Lấy tổng Commits toàn tài khoản (Search API)
+          # 3. Lấy tổng Commits toàn GitHub (Search API cho cả Public & Private)
           TOTAL_COMMITS=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
             "https://api.github.com/search/commits?q=author:thuangf45" | jq '.total_count // 0')
 
-          # 4. Tính tổng Stars và Forks
+          # 4. Tính tổng Stars và Forks trên mọi repository
           TOTAL_STARS=$(echo $REPO_LIST | jq '[.[].stargazers_count] | add // 0')
           TOTAL_FORKS=$(echo $REPO_LIST | jq '[.[].forks_count] | add // 0')
 
-          # 5. Lấy số lượt tải LuciferCore từ NuGet
-          # API NuGet trả về tổng lượt tải (totalDownloads) của package
-          NUGET_DATA=$(curl -s https://azuresearch-usnc.nuget.org/query?q=packageid:LuciferCore)
-          NUGET_DOWNLOADS=$(echo $NUGET_DATA | jq '.data[0].totalDownloads // 0')
+          # 5. Lấy TỔNG lượt tải NuGet (Quét toàn bộ package của owner thuangf45)
+          # Query theo owner giúp cộng dồn LuciferCore và các package khác
+          NUGET_RESP=$(curl -s "https://azuresearch-usnc.nuget.org/query?q=owner:thuangf45")
+          TOTAL_NUGET_DOWNLOADS=$(echo $NUGET_RESP | jq '[.data[].totalDownloads] | add // 0')
 
           # 6. Lấy dữ liệu từ Dev.to
           curl -s "https://dev.to/api/articles?username=thuangf45" > articles.json
@@ -55,7 +56,8 @@ jobs:
           DEVTO_REACTIONS=$(jq '[.[] | .public_reactions_count // 0] | add // 0' articles.json)
 
           # 7. Xuất các file JSON tổng hợp
-          echo "{\"commits\":$TOTAL_COMMITS,\"stars\":$TOTAL_STARS,\"forks\":$FORKS,\"nuget_downloads\":$NUGET_DOWNLOADS}" > github-stats.json
+          # nuget_total sẽ thay thế nuget_downloads cũ để phản ánh tổng thể
+          echo "{\"commits\":$TOTAL_COMMITS,\"stars\":$TOTAL_STARS,\"forks\":$FORKS,\"nuget_total\":$TOTAL_NUGET_DOWNLOADS}" > github-stats.json
           echo "{\"posts\":$DEVTO_POSTS,\"reactions\":$DEVTO_REACTIONS}" > devto.json
 
       - name: Commit and Push
