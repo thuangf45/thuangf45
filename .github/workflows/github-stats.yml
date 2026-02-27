@@ -24,7 +24,7 @@ jobs:
           REPO_LIST=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
             "https://api.github.com/users/thuangf45/repos?per_page=100")
 
-          # 2. Tính toán Top Languages (Mảng top 6 để Shields.io bóc tách $[0])
+          # 2. Tính toán Top Languages (Cộng dồn Byte trên toàn bộ Ecosystem)
           echo "{}" > all_languages.json
           for repo in $(echo $REPO_LIST | jq -r '.[].full_name'); do
             curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
@@ -34,26 +34,37 @@ jobs:
           done
           jq 'to_entries | sort_by(.value) | reverse | .[0:6] | map(.key)' all_languages.json > top-langs.json
 
-          # 3. Lấy tổng Commits (Global Search)
+          # 3. Lấy tổng Commits toàn tài khoản (Public & Private)
           TOTAL_COMMITS=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
             "https://api.github.com/search/commits?q=author:thuangf45" | jq '.total_count // 0')
 
-          # 4. Tính tổng Stars và Forks
+          # 4. Lấy tổng Pull Requests (Tất cả PRs bạn đã tạo)
+          TOTAL_PRS=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            "https://api.github.com/search/issues?q=author:thuangf45+type:pr" | jq '.total_count // 0')
+
+          # 5. Lấy tổng Issues (Tất cả Issues bạn đã mở)
+          TOTAL_ISSUES=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            "https://api.github.com/search/issues?q=author:thuangf45+type:issue" | jq '.total_count // 0')
+
+          # 6. Lấy tổng Code Reviews (Số lần bạn review PR của người khác)
+          TOTAL_REVIEWS=$(curl -s -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            "https://api.github.com/search/issues?q=commenter:thuangf45+type:pr+-author:thuangf45" | jq '.total_count // 0')
+
+          # 7. Tính tổng Stars và Forks
           TOTAL_STARS=$(echo $REPO_LIST | jq '[.[].stargazers_count] | add // 0')
           TOTAL_FORKS=$(echo $REPO_LIST | jq '[.[].forks_count] | add // 0')
 
-          # 5. Lấy TỔNG lượt tải NuGet cho owner thuangf45
+          # 8. Lấy TỔNG lượt tải NuGet cho owner thuangf45
           NUGET_RESP=$(curl -s "https://azuresearch-usnc.nuget.org/query?q=owner:thuangf45")
           TOTAL_NUGET_DOWNLOADS=$(echo $NUGET_RESP | jq '[.data[].totalDownloads] | add // 0')
 
-          # 6. Lấy dữ liệu từ Dev.to
+          # 9. Lấy dữ liệu từ Dev.to
           curl -s "https://dev.to/api/articles?username=thuangf45" > articles.json
           DEVTO_POSTS=$(jq 'length' articles.json)
           DEVTO_REACTIONS=$(jq '[.[] | .public_reactions_count // 0] | add // 0' articles.json)
 
-          # 7. Xuất các file JSON tổng hợp (SỬA LỖI: Gán mặc định 0 nếu rỗng)
-          # Dùng cú pháp ${VAR:-0} để tránh lỗi "forks":,
-          echo "{\"commits\":${TOTAL_COMMITS:-0},\"stars\":${TOTAL_STARS:-0},\"forks\":${TOTAL_FORKS:-0},\"nuget_total\":${TOTAL_NUGET_DOWNLOADS:-0}}" > github-stats.json
+          # 10. Xuất các file JSON tổng hợp (Đảm bảo giá trị mặc định là 0 để tránh lỗi cấu trúc)
+          echo "{\"commits\":${TOTAL_COMMITS:-0},\"prs\":${TOTAL_PRS:-0},\"issues\":${TOTAL_ISSUES:-0},\"reviews\":${TOTAL_REVIEWS:-0},\"stars\":${TOTAL_STARS:-0},\"forks\":${TOTAL_FORKS:-0},\"nuget_total\":${TOTAL_NUGET_DOWNLOADS:-0}}" > github-stats.json
           echo "{\"posts\":${DEVTO_POSTS:-0},\"reactions\":${DEVTO_REACTIONS:-0}}" > devto.json
 
       - name: Commit and Push
@@ -64,6 +75,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update Global Dashboard Stats [skip ci]"
+            git commit -m "Update Comprehensive Global Stats [skip ci]"
             git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/thuangf45/thuangf45.git HEAD:main
           fi
