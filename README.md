@@ -58,7 +58,6 @@ I am a **System Architect** and IT student at **VNU-HCM University of Science**.
 ### 📫 Connect with me
 - 🌐 **NuGet:** [thuangf45 on Nuget.org](https://www.nuget.org/profiles/thuangf45)
 - 📝 **Blog:** [thuangf45 on Dev.to](https://dev.to/thuangf45)
-- 👤 **Facebook:** [Minh Thuận](https://www.facebook.com/minhthuan.nguyen.773124)
 - 📧 **Email:** kingnemacc@gmail.com
 
 <p align="center">
