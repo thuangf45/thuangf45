@@ -3,7 +3,7 @@
 </div>
 <br>
 
-# Nguyen Minh Thuan (thuangf45)
+# Nguyen Minh Thuan
 
 <div align="center">
   <p>
